@@ -16,7 +16,7 @@ interface Tile {
 }
 
 const tileClass =
-  'flex flex-col rounded-lg border border-slate-200 bg-white px-4 py-3 shadow-sm';
+  'flex flex-col rounded-lg border border-slate-200 bg-white px-4 py-3 shadow-sm dark:border-slate-700 dark:bg-slate-800';
 
 export const MetricsBar = ({ fund }: Props) => {
   const tiles: Tile[] = [
@@ -36,12 +36,16 @@ export const MetricsBar = ({ fund }: Props) => {
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
       {tiles.map((tile) => (
         <div key={tile.label} className={tileClass}>
-          <span className="text-xs font-medium uppercase tracking-wide text-slate-500">
+          <span className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
             {tile.label}
           </span>
-          <span className="mt-1 text-xl font-semibold text-slate-900">{tile.value}</span>
+          <span className="mt-1 text-xl font-semibold text-slate-900 dark:text-slate-100">
+            {tile.value}
+          </span>
           {tile.hint && (
-            <span className="mt-0.5 text-[11px] text-slate-400">{tile.hint}</span>
+            <span className="mt-0.5 text-[11px] text-slate-400 dark:text-slate-500">
+              {tile.hint}
+            </span>
           )}
         </div>
       ))}

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import type { FormEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ApiError } from '../api/client';
 import { useAuth } from '../auth/AuthContext';
@@ -15,7 +14,7 @@ export const LoginPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = async (event: FormEvent) => {
+  const handleSubmit = async (event: { preventDefault(): void }) => {
     event.preventDefault();
     setError(null);
     setSubmitting(true);
@@ -34,19 +33,26 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-full flex items-center justify-center px-4 py-12 bg-gradient-to-br from-slate-50 to-brand-50">
+    <div className="flex min-h-full items-center justify-center bg-gradient-to-br from-slate-50 to-brand-50 px-4 py-12 dark:from-slate-900 dark:to-slate-800">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-semibold text-slate-900">Nordic Analytics</h1>
-          <p className="mt-2 text-sm text-slate-600">Fund Intelligence Dashboard</p>
+          <h1 className="text-3xl font-semibold text-slate-900 dark:text-slate-100">
+            Nordic Analytics
+          </h1>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+            Fund Intelligence Dashboard
+          </p>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-xl shadow-sm ring-1 ring-slate-200 p-6 space-y-5"
+          className="space-y-5 rounded-xl bg-white p-6 shadow-sm ring-1 ring-slate-200 dark:bg-slate-800 dark:ring-slate-700"
         >
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1">
+            <label
+              htmlFor="email"
+              className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
+            >
               Email
             </label>
             <input
@@ -56,12 +62,15 @@ export const LoginPage = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:placeholder-slate-400 dark:focus:border-brand-400 dark:focus:ring-brand-400"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-1">
+            <label
+              htmlFor="password"
+              className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
+            >
               Password
             </label>
             <input
@@ -71,14 +80,14 @@ export const LoginPage = () => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:placeholder-slate-400 dark:focus:border-brand-400 dark:focus:ring-brand-400"
             />
           </div>
 
           {error && (
             <div
               role="alert"
-              className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700 ring-1 ring-rose-200"
+              className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700 ring-1 ring-rose-200 dark:bg-rose-950/50 dark:text-rose-400 dark:ring-rose-800"
             >
               {error}
             </div>
@@ -87,12 +96,12 @@ export const LoginPage = () => {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+            className="w-full rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 dark:focus:ring-offset-slate-800"
           >
             {submitting ? 'Signing in…' : 'Sign in'}
           </button>
 
-          <p className="text-center text-xs text-slate-500">
+          <p className="text-center text-xs text-slate-500 dark:text-slate-500">
             Demo credentials are pre-filled.
           </p>
         </form>
