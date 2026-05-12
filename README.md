@@ -2,6 +2,23 @@
 
 React frontend for the Nordic Analytics Fund Intelligence Dashboard. Connects to the [Fund Intelligence API](https://github.com/likhithashree01-beep/FundIntelligenceApi) to display fund metrics, NAV performance, and portfolio company data with JWT-authenticated access.
 
+## Live demo
+
+| | URL |
+| --- | --- |
+| Frontend | https://fund-intelligence-web.vercel.app |
+| Backend API | https://fundintelligenceapi.onrender.com |
+
+Sign in with `demo@nordic.io` / `demo123`.
+
+### Deployment gotchas
+
+- **Render cold start** — the backend runs on Render's free tier and sleeps after 15 min of inactivity. The first request after idle takes ~30 sec to wake up. Subsequent requests are instant.
+- **SQLite resets on redeploy** — Render's filesystem is ephemeral; every new deploy starts with a fresh database. This is fine because the app auto-seeds on boot — data is always there when the server starts.
+- **CORS** — currently set to `*` for simplicity. For a stricter production setup, set `CORS_ORIGIN=https://fund-intelligence-web.vercel.app` in Render's environment variables.
+- **SPA routing** — `vercel.json` rewrites all routes to `index.html` so React Router handles navigation. Without it, direct URL access to `/login` or a hard refresh would return a 404 from Vercel.
+- **Node version** — the backend is pinned to Node 20.x. `better-sqlite3` v11 fails to compile on Node 26 due to a breaking V8 API change.
+
 ## Repos
 
 | Service | Repository |
